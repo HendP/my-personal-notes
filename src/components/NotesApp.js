@@ -7,14 +7,27 @@ class NotesApp extends React.Component {
         super(props);
         this.state = {
             notes: getInitialData(),
+            query: '',
+            filteredNotes: [],
         };
 
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
+        this.onSearchHandler = this.onSearchHandler.bind(this);
     }
 
     onDeleteHandler(id) {
         const notes = this.state.notes.filter((note) => note.id !== id);
-        this.setState({ notes:notes });
+        this.setState({ notes: notes });
+    }
+
+    onSearchHandler(query) {
+        const lowerQuery = query.toLowerCase();
+        const notes = this.state.notes;
+        const filteredNotes = notes.filter((note) =>
+            note.title.toLowerCase().includes(lowerQuery)
+        );
+        this.setState({ query: lowerQuery });
+        this.setState({ filteredNotes: filteredNotes });
     }
 
     render() {
@@ -28,15 +41,23 @@ class NotesApp extends React.Component {
                         id="search-form"
                         className="note-search"
                         placeholder="Cari catatan ..."
-
+                        value={this.state.query}
+                        onChange={(e) => this.onSearchHandler(e.target.value)}
                     />
                 </div>
                 <div className="note-app__body">
                     <h2>Catatan Aktif</h2>
-                    <NotesList
-                        notes={this.state.notes}
-                        onDelete={this.onDeleteHandler}
-                    />
+                    {this.state.query.length <= 0 ? (
+                        <NotesList
+                            notes={this.state.notes}
+                            onDelete={this.onDeleteHandler}
+                        />
+                    ) : (
+                        <NotesList
+                            notes={this.state.filteredNotes}
+                            onDelete={this.onDeleteHandler}
+                        />
+                    )}
                 </div>
             </React.Fragment>
         );
