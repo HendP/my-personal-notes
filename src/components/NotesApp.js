@@ -1,5 +1,6 @@
 import React from 'react';
-import { getInitialData } from '../utils';
+import { getInitialData, showFormattedDate } from '../utils';
+import NoteInput from './NoteInput';
 import NotesList from './NotesList';
 
 class NotesApp extends React.Component {
@@ -11,11 +12,29 @@ class NotesApp extends React.Component {
             filteredNotes: [],
         };
 
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
+        this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
         this.onSearchHandler = this.onSearchHandler.bind(this);
+        this.onAddNotehandler = this.onAddNotehandler.bind(this);
     }
 
-    onDeleteHandler(id) {
+    onAddNotehandler({ title, body }) {
+        this.setState((prevState) => {
+            return {
+                notes: [
+                    ...prevState.notes,
+                    {
+                        id: +new Date(),
+                        title,
+                        body,
+                        createAt: showFormattedDate(+new Date()),
+                        archived: false,
+                    },
+                ],
+            };
+        });
+    }
+
+    onDeleteNoteHandler(id) {
         const notes = this.state.notes.filter((note) => note.id !== id);
         this.setState({ notes: notes });
     }
@@ -46,16 +65,17 @@ class NotesApp extends React.Component {
                     />
                 </div>
                 <div className="note-app__body">
+                    <NoteInput addNote={this.onAddNotehandler} />
                     <h2>Catatan Aktif</h2>
                     {this.state.query.length <= 0 ? (
                         <NotesList
                             notes={this.state.notes}
-                            onDelete={this.onDeleteHandler}
+                            onDelete={this.onDeleteNoteHandler}
                         />
                     ) : (
                         <NotesList
                             notes={this.state.filteredNotes}
-                            onDelete={this.onDeleteHandler}
+                            onDelete={this.onDeleteNoteHandler}
                         />
                     )}
                 </div>
