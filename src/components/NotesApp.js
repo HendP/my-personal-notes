@@ -14,7 +14,7 @@ class NotesApp extends React.Component {
 
     onDeleteHandler(id) {
         const notes = this.state.notes.filter((note) => note.id !== id);
-        this.setState({ notes });
+        this.setState({ notes:notes });
     }
 
     render() {
@@ -22,6 +22,14 @@ class NotesApp extends React.Component {
             <React.Fragment>
                 <div className="note-app__header">
                     <h1>Notes</h1>
+                    <input
+                        type="search"
+                        name="search-form"
+                        id="search-form"
+                        className="note-search"
+                        placeholder="Cari catatan ..."
+
+                    />
                 </div>
                 <div className="note-app__body">
                     <h2>Catatan Aktif</h2>
