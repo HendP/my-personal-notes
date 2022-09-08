@@ -1,5 +1,5 @@
 import React from 'react';
-import { getInitialData, showFormattedDate } from '../utils';
+import { getInitialData } from '../utils';
 import NoteInput from './NoteInput';
 import NotesList from './NotesList';
 
@@ -26,7 +26,7 @@ class NotesApp extends React.Component {
                         id: +new Date(),
                         title,
                         body,
-                        createAt: showFormattedDate(+new Date()),
+                        createdAt: new Date().toISOString(),
                         archived: false,
                     },
                 ],
