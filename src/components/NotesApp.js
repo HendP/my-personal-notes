@@ -8,6 +8,13 @@ class NotesApp extends React.Component {
         this.state = {
             notes: getInitialData(),
         };
+
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    }
+
+    onDeleteHandler(id) {
+        const notes = this.state.notes.filter((note) => note.id !== id);
+        this.setState({ notes });
     }
 
     render() {
@@ -18,7 +25,10 @@ class NotesApp extends React.Component {
                 </div>
                 <div className="note-app__body">
                     <h2>Catatan Aktif</h2>
-                    <NotesList notes={this.state.notes} />
+                    <NotesList
+                        notes={this.state.notes}
+                        onDelete={this.onDeleteHandler}
+                    />
                 </div>
             </React.Fragment>
         );
