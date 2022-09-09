@@ -1,6 +1,9 @@
 import React from 'react';
 import NotesList from './NotesList';
 import NoteInput from './NoteInput';
+import NoteActive from './NoteActive';
+import NoteArchive from './NoteArchive';
+
 function NoteBody({
     activeNotes,
     archivedNotes,
@@ -14,22 +17,14 @@ function NoteBody({
     return (
         <div className="note-app__body">
             <NoteInput addNote={onAdd} />
-            <h2>Catatan Aktif</h2>
-            {query.length <= 0 ? (
-                <NotesList
-                    notes={activeNotes}
-                    onDelete={onDelete}
-                    onArchive={onArchive}
-                />
-            ) : (
-                <NotesList
-                    notes={filteredActiveNotes}
-                    onDelete={onDelete}
-                    onArchive={onArchive}
-                />
-            )}
-            <h2>Arsip</h2>
-            {query.length <= 0 ? (
+            <NoteActive
+                query={query}
+                activeNotes={activeNotes}
+                onDelete={onDelete}
+                onArchive={onArchive}
+                filteredActiveNotes={filteredActiveNotes}
+            />
+            {/* {query.length <= 0 ? (
                 <NotesList
                     notes={archivedNotes}
                     onDelete={onDelete}
@@ -41,7 +36,14 @@ function NoteBody({
                     onDelete={onDelete}
                     onArchive={onArchive}
                 />
-            )}
+            )} */}
+            <NoteArchive
+                query={query}
+                archivedNotes={archivedNotes}
+                onDelete={onDelete}
+                onArchive={onArchive}
+                filteredArchivedNotes={filteredArchivedNotes}
+            />
         </div>
     );
 }

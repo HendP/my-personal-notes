@@ -45,7 +45,6 @@ class NotesApp extends React.Component {
             return note;
         });
         this.setState({ notes: notes });
-        console.log(notes);
     }
 
     onDeleteNoteHandler(id) {
