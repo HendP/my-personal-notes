@@ -89,9 +89,18 @@ class NotesApp extends React.Component {
         const archivedNotes = this.state.notes.filter(
             (note) => note.archived === true
         );
+        const filteredActiveNotes = this.state.filteredNotes.filter(
+            (note) => note.archived === false
+        );
+        const filteredArchivedNotes = this.state.filteredNotes.filter(
+            (note) => note.archived === true
+        );
         return (
             <React.Fragment>
-                <NoteHeader query={this.state.query} onSearch={this.onSearchHandler}/>
+                <NoteHeader
+                    query={this.state.query}
+                    onSearch={this.onSearchHandler}
+                />
                 <div className="note-app__body">
                     <NoteInput addNote={this.onAddNotehandler} />
                     <h2>Catatan Aktif</h2>
@@ -103,7 +112,7 @@ class NotesApp extends React.Component {
                         />
                     ) : (
                         <NotesList
-                            notes={this.state.filteredNotes}
+                            notes={filteredActiveNotes}
                             onDelete={this.onDeleteNoteHandler}
                             onArchive={this.onArchivedNoteHandler}
                         />
@@ -117,7 +126,7 @@ class NotesApp extends React.Component {
                         />
                     ) : (
                         <NotesList
-                            notes={this.state.filteredNotes}
+                            notes={filteredArchivedNotes}
                             onDelete={this.onDeleteNoteHandler}
                             onArchive={this.onArchivedNoteHandler}
                         />
