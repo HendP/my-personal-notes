@@ -1,5 +1,4 @@
 import React from 'react';
-import NotesList from './NotesList';
 import NoteInput from './NoteInput';
 import NoteActive from './NoteActive';
 import NoteArchive from './NoteArchive';
@@ -24,19 +23,6 @@ function NoteBody({
                 onArchive={onArchive}
                 filteredActiveNotes={filteredActiveNotes}
             />
-            {/* {query.length <= 0 ? (
-                <NotesList
-                    notes={archivedNotes}
-                    onDelete={onDelete}
-                    onArchive={onArchive}
-                />
-            ) : (
-                <NotesList
-                    notes={filteredArchivedNotes}
-                    onDelete={onDelete}
-                    onArchive={onArchive}
-                />
-            )} */}
             <NoteArchive
                 query={query}
                 archivedNotes={archivedNotes}

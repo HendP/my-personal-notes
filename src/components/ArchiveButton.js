@@ -1,13 +1,26 @@
 import React from 'react';
 
-function ArchiveButton({ id, onArchive }) {
+function ArchiveButton({ id, onArchive, status }) {
     return (
-        <button
-            className="note-item__archive-button"
-            onClick={() => onArchive(id)}
-        >
-            Archive
-        </button>
+        <React.Fragment>
+            {status === 'Active' && (
+                <button
+                    className="note-item__archive-button"
+                    onClick={() => onArchive(id)}
+                >
+                    Archive
+                </button>
+            )}
+
+            {status === 'Archive' && (
+                <button
+                    className="note-item__archive-button"
+                    onClick={() => onArchive(id)}
+                >
+                    Activate
+                </button>
+            )}
+        </React.Fragment>
     );
 }
 
