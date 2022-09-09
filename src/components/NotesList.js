@@ -1,7 +1,7 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 
-function NotesList({ notes, onDelete }) {
+function NotesList({ notes, onDelete, onArchive }) {
     return (
         <React.Fragment>
             {notes.length > 0 && (
@@ -11,6 +11,7 @@ function NotesList({ notes, onDelete }) {
                             key={note.id}
                             id={note.id}
                             onDelete={onDelete}
+                            onArchive={onArchive}
                             {...note}
                         />
                     ))}
