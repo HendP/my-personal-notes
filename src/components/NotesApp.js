@@ -1,8 +1,7 @@
 import React from 'react';
 import { getInitialData } from '../utils';
+import NoteBody from './NoteBody';
 import NoteHeader from './NoteHeader';
-import NoteInput from './NoteInput';
-import NotesList from './NotesList';
 
 class NotesApp extends React.Component {
     constructor(props) {
@@ -101,37 +100,16 @@ class NotesApp extends React.Component {
                     query={this.state.query}
                     onSearch={this.onSearchHandler}
                 />
-                <div className="note-app__body">
-                    <NoteInput addNote={this.onAddNotehandler} />
-                    <h2>Catatan Aktif</h2>
-                    {this.state.query.length <= 0 ? (
-                        <NotesList
-                            notes={activeNotes}
-                            onDelete={this.onDeleteNoteHandler}
-                            onArchive={this.onArchivedNoteHandler}
-                        />
-                    ) : (
-                        <NotesList
-                            notes={filteredActiveNotes}
-                            onDelete={this.onDeleteNoteHandler}
-                            onArchive={this.onArchivedNoteHandler}
-                        />
-                    )}
-                    <h2>Arsip</h2>
-                    {this.state.query.length <= 0 ? (
-                        <NotesList
-                            notes={archivedNotes}
-                            onDelete={this.onDeleteNoteHandler}
-                            onArchive={this.onArchivedNoteHandler}
-                        />
-                    ) : (
-                        <NotesList
-                            notes={filteredArchivedNotes}
-                            onDelete={this.onDeleteNoteHandler}
-                            onArchive={this.onArchivedNoteHandler}
-                        />
-                    )}
-                </div>
+                <NoteBody
+                    activeNotes={activeNotes}
+                    archivedNotes={archivedNotes}
+                    filteredActiveNotes={filteredActiveNotes}
+                    filteredArchivedNotes={filteredArchivedNotes}
+                    onAdd={this.onAddNotehandler}
+                    onDelete={this.onDeleteNoteHandler}
+                    onArchive={this.onArchivedNoteHandler}
+                    query={this.state.query}
+                />
             </React.Fragment>
         );
     }
