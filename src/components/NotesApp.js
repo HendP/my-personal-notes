@@ -1,5 +1,6 @@
 import React from 'react';
 import { getInitialData } from '../utils';
+import NoteHeader from './NoteHeader';
 import NoteInput from './NoteInput';
 import NotesList from './NotesList';
 
@@ -90,18 +91,7 @@ class NotesApp extends React.Component {
         );
         return (
             <React.Fragment>
-                <div className="note-app__header">
-                    <h1>Notes</h1>
-                    <input
-                        type="search"
-                        name="search-form"
-                        id="search-form"
-                        className="note-search"
-                        placeholder="Cari catatan ..."
-                        value={this.state.query}
-                        onChange={(e) => this.onSearchHandler(e.target.value)}
-                    />
-                </div>
+                <NoteHeader query={this.state.query} onSearch={this.onSearchHandler}/>
                 <div className="note-app__body">
                     <NoteInput addNote={this.onAddNotehandler} />
                     <h2>Catatan Aktif</h2>
